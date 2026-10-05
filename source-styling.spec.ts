@@ -1,14 +1,15 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { filesUnder } from '../library-files';
+import { filesUnder } from './library-files';
 
-const LIBRARY = new URL('../', import.meta.url);
+const LIBRARY = new URL('./', import.meta.url);
 const TEXT_EXTENSIONS = ['.css', '.svelte', '.ts', '.js', '.html'];
+const CORE = 'core/';
 const PLAYGROUND = 'playground/';
 const LEGACY_PROPERTY = new RegExp('(?<![\\w-])--[cfsr]-[\\w-]+', 'u');
 
 function libraryFiles(extensions: readonly string[]): readonly string[] {
-  return filesUnder(LIBRARY, extensions);
+  return filesUnder(LIBRARY, extensions).filter((path) => !path.startsWith(CORE));
 }
 
 function read(path: string): string {
@@ -64,6 +65,14 @@ describe('the styling of the library source', () => {
           .filter((classes) => /(?<![\w-])text-muted(?![\w-])/u.test(classes))
           .map((classes) => `${path}: ${classes}`),
       );
+
+    expect(offenders).toEqual([]);
+  });
+
+  it('keeps every --ds- name out of the components and the playground', () => {
+    const offenders = libraryFiles(['.css', '.svelte', '.html']).filter((path) =>
+      read(path).includes('--ds-'),
+    );
 
     expect(offenders).toEqual([]);
   });

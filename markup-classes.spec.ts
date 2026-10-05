@@ -1,9 +1,9 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { filesUnder } from '../library-files';
+import { filesUnder } from './library-files';
 
-const LIBRARY = new URL('../', import.meta.url);
-const STYLES = new URL('./', import.meta.url);
+const LIBRARY = new URL('./', import.meta.url);
+const STYLES = new URL('./core/styles/', import.meta.url);
 const LIBRARY_FOLDERS = ['components/', 'utilities/', 'overrides/'];
 
 type Written = { readonly file: string; readonly name: string; readonly defined: boolean };
