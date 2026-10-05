@@ -106,7 +106,8 @@ library is an ordinary commit and goes through review like any other change; sen
 With `--squash`, the next `pull` compares against the last `pull`, not the last `push`. A file that
 was edited in the app, pushed, and then changed again in the library therefore conflicts on that
 `pull`, even though the app holds nothing the library lacks. Resolve each such conflict by taking
-the library's side (`git checkout --theirs -- <path>`), then check that the folder equals the
+the library's side (`git checkout --theirs -- <path>`, then `git add <path>`; `git write-tree`
+refuses while a conflict is unstaged), then check that the folder equals the
 library's tree at the pulled commit before you commit the merge:
 `git diff FETCH_HEAD $(git write-tree --prefix=<prefix>/)` prints nothing (`git subtree pull`
 leaves the pulled commit in `FETCH_HEAD`).
