@@ -101,7 +101,15 @@ Because of that merge, a library update cannot travel through a pull request tha
 "Rebase and merge": a rebase drops the merge and replays the squashed tree at the root of the
 repository. Run `git subtree pull` on `main` directly and push the result. A local edit to the
 library is an ordinary commit and goes through review like any other change; send it back with
-`git subtree push` so the next `pull` does not conflict with it.
+`git subtree push` so the library has it.
+
+With `--squash`, the next `pull` compares against the last `pull`, not the last `push`. A file that
+was edited in the app, pushed, and then changed again in the library therefore conflicts on that
+`pull`, even though the app holds nothing the library lacks. Resolve each such conflict by taking
+the library's side (`git checkout --theirs -- <path>`), then check that the folder equals the
+library's tree at the pulled commit before you commit the merge:
+`git diff FETCH_HEAD $(git write-tree --prefix=<prefix>/)` prints nothing (`git subtree pull`
+leaves the pulled commit in `FETCH_HEAD`).
 
 `git subtree add` refuses a prefix that already exists. To replace a copy, remove the folder in one
 commit and add it in the next.
