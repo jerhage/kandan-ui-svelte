@@ -6,6 +6,7 @@
     "test": "vitest --run",
     "test:unit": "vitest --run --project unit",
     "test:watch": "vitest",
+    "test:browser": "vitest --run --config vitest.browser.config.ts",
     "test:core": "node --test \"core/**/*.test.js\"",
     "generate:icons": "node scripts/generate-icons.js",
     "check": "svelte-check --tsconfig ./tsconfig.json",
