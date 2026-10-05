@@ -7,6 +7,7 @@
     "test:unit": "vitest --run --project unit",
     "test:watch": "vitest",
     "test:core": "node --test \"core/**/*.test.js\"",
+    "generate:icons": "node scripts/generate-icons.js",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "lint": "oxlint .",
     "format": "oxfmt .",
