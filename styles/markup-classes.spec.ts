@@ -3,7 +3,7 @@ import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 
-const SOURCE = new URL('../../../', import.meta.url);
+const LIBRARY = new URL('../', import.meta.url);
 const STYLES = new URL('./', import.meta.url);
 const LIBRARY_FOLDERS = ['components/', 'utilities/', 'overrides/'];
 
@@ -63,12 +63,12 @@ function writtenClasses(source: string): readonly string[] {
 }
 
 function everyWrittenClass(): readonly Written[] {
-  const stylesheets = filesUnder(SOURCE, '.css')
-    .map((path) => read(SOURCE, path))
+  const stylesheets = filesUnder(LIBRARY, '.css')
+    .map((path) => read(LIBRARY, path))
     .join('\n');
   const defined = classesIn(stylesheets);
-  return filesUnder(SOURCE, '.svelte').flatMap((file) => {
-    const source = read(SOURCE, file);
+  return filesUnder(LIBRARY, '.svelte').flatMap((file) => {
+    const source = read(LIBRARY, file);
     const local = classesIn(ownStyles(source));
     return writtenClasses(source).map((name) => ({
       file,
@@ -90,7 +90,7 @@ function family(name: string): string {
   return name.split('-')[0] ?? '';
 }
 
-describe('the classes the markup writes', () => {
+describe('the classes the library markup writes', () => {
   it('reads class attributes, class props, class expressions and class directives', () => {
     const source = [
       '<script>let on = true;</script>',
@@ -111,13 +111,11 @@ describe('the classes the markup writes', () => {
     const written = everyWrittenClass();
     const namesIn = (file: string): readonly string[] =>
       written.filter((found) => found.file.endsWith(file)).map((found) => found.name);
-    const library = namesIn('domains/library/ui/LibraryScreen.svelte');
-    const shelf = namesIn('domains/library/ui/ShelfView.svelte');
+    const header = namesIn('components/PageHeader.svelte');
+    const card = namesIn('components/Card.svelte');
 
-    expect(library).toEqual(
-      expect.arrayContaining(['layout-app-shell-header', 'layout-app-shell-wide-only']),
-    );
-    expect(shelf).toContain('layout-app-shell-narrow-nowrap');
+    expect(header).toEqual(expect.arrayContaining(['page-header', 'text-faint', 'truncate']));
+    expect(card).toEqual(expect.arrayContaining(['card-body', 'card-eyebrow', 'eyebrow']));
   });
 
   it('finds every class of a design system family in some stylesheet', () => {
