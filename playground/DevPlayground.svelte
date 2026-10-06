@@ -2,6 +2,9 @@
   import Field from '../components/Field.svelte';
   import SegmentedControl from '../components/SegmentedControl.svelte';
   import Select from '../components/Select.svelte';
+  import ToastRegion from '../components/ToastRegion.svelte';
+  import { setToaster } from '../components/toast-context';
+  import { createToaster } from '../components/toaster.svelte';
   import {
     COLOR_SCHEMES,
     THEMES,
@@ -23,6 +26,8 @@
     value: scheme,
     label: SCHEME_LABELS[scheme],
   }));
+
+  setToaster(createToaster());
 
   let appearance: Appearance = $state(readAppearance(document.documentElement));
 
@@ -71,3 +76,5 @@
     </div>
   {/snippet}
 </Playground>
+
+<ToastRegion />

@@ -510,6 +510,10 @@ variants, sizes and states. An app mounts it on a development route, and may pas
   which saves the choice the app's way.
 - `demos`, rendered after the library's sections: demos of the app's own components.
 
+The toast demos need a toaster from an ancestor: the app's root layout calls
+`setToaster(createToaster())` and renders `<ToastRegion />`, as `playground/DevPlayground.svelte`
+does for `npm run dev`. Without it the playground throws "No toaster in context".
+
 An example route, `src/routes/playground/+page.svelte`, with the app's switcher in
 `$lib/ThemeSwitcher.svelte`:
 
