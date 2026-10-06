@@ -205,8 +205,11 @@ choices go through `userEvent`, and presses, moves and lifts of a mouse or a tou
 commands in `contract/rule-input.ts`, so Chromium receives trusted input and runs its own default
 actions: a summary toggles, a dialog cancels, a popover is light dismissed, a button takes focus.
 A drag is the exception: the runner dispatches drag events it builds, so a rule that checks the
-drop effect, which only a drag the browser runs carries, is listed as a todo with that reason. A
-subject can also ask for the page layout a host gives it (`layout`), a coarse pointer
+drop effect, which only a drag the browser runs carries, is listed as a todo with that reason.
+A `transitionend` in a rule finishes the target's running transitions, so Chromium fires the real
+event with its `propertyName`. A measured style value (`{ "value": 40, "unit": "px",
+"tolerance": 0.5 }`) passes when the written number is within the tolerance, since Vitest scales
+the test frame and a measured size can land a fraction of a pixel off. A subject can also ask for the page layout a host gives it (`layout`), a coarse pointer
 (`coarsePointer`, for a control only a touch screen shows), or wiring an app would add
 (`connect`).
 
