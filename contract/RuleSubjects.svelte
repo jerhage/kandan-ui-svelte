@@ -18,6 +18,7 @@
   import Tabs from '../components/Tabs.svelte';
   import Toast from '../components/Toast.svelte';
   import ToastRegion from '../components/ToastRegion.svelte';
+  import Tooltip from '../components/Tooltip.svelte';
   import WindowDropzone from '../components/WindowDropzone.svelte';
   import { ENTRIES, SLIDES, TABS, TABS_WITH_DISABLED } from './case-data';
   import type { RuleControls } from './rule-controls.svelte';
@@ -45,6 +46,7 @@
     tabsUnderline,
     toastRegionBottom,
     toasts,
+    tooltipDefault,
     windowDropzoneIdle,
   };
 </script>
@@ -204,4 +206,10 @@
 
 {#snippet windowDropzoneIdle(controls: RuleControls)}
   <WindowDropzone onfiles={controls.record('onfiles')}>Drop to add</WindowDropzone>
+{/snippet}
+
+{#snippet tooltipDefault(_controls: RuleControls)}
+  <Tooltip text="Save the changes"
+    >{#snippet trigger(props)}<Button {...props}>Save</Button>{/snippet}</Tooltip
+  >
 {/snippet}

@@ -75,6 +75,7 @@
   import ToastClearance from '../components/ToastClearance.svelte';
   import ToastRegion from '../components/ToastRegion.svelte';
   import Toggle from '../components/Toggle.svelte';
+  import Tooltip from '../components/Tooltip.svelte';
   import WindowDropzone from '../components/WindowDropzone.svelte';
   import Ellipsis from '../components/icons/Ellipsis.svelte';
   import LayoutGrid from '../components/icons/LayoutGrid.svelte';
@@ -434,6 +435,7 @@
     toggleDefault,
     toggleChecked,
     toggleDisabled,
+    tooltipDefault,
     windowDropzoneIdle,
   };
 </script>
@@ -1493,4 +1495,8 @@
 {#snippet toggleDisabled()}<Toggle disabled>Sync</Toggle>{/snippet}
 
 {#snippet windowDropzoneIdle()}<WindowDropzone onfiles={() => {}}>Drop to add</WindowDropzone
+  >{/snippet}
+
+{#snippet tooltipDefault()}<Tooltip text="Save the changes"
+    >{#snippet trigger(props)}<Button {...props}>Save</Button>{/snippet}</Tooltip
   >{/snippet}

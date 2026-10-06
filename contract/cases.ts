@@ -350,6 +350,7 @@ const CASES: readonly ContractCase[] = [
   { path: 'toggle/default', render: markup.toggleDefault },
   { path: 'toggle/checked', render: markup.toggleChecked },
   { path: 'toggle/disabled', render: markup.toggleDisabled },
+  { path: 'tooltip/default', render: markup.tooltipDefault },
   { path: 'window-dropzone/idle', render: markup.windowDropzoneIdle },
 ];
 

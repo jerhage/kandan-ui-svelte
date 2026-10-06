@@ -167,6 +167,7 @@ const RULE_SUBJECTS: Readonly<Record<string, RuleSubject>> = {
   })),
   'toast/info': toastSubject(() => ({ title: 'Saved', variant: 'info' })),
   'toast/timed': toastSubject(() => ({ title: 'Saved', duration: 8000 })),
+  'tooltip/default': { render: subjects.tooltipDefault },
   'window-dropzone/idle': { render: subjects.windowDropzoneIdle },
 };
 
