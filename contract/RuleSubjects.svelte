@@ -5,6 +5,7 @@
   import Carousel from '../components/Carousel.svelte';
   import CodeBlock from '../components/CodeBlock.svelte';
   import Dock from '../components/Dock.svelte';
+  import Drawer from '../components/Drawer.svelte';
   import Dropdown from '../components/Dropdown.svelte';
   import DropdownItem from '../components/DropdownItem.svelte';
   import DropdownLabel from '../components/DropdownLabel.svelte';
@@ -32,6 +33,7 @@
     codeBlockCopy,
     dockSheet,
     dockSide,
+    drawerDefault,
     dropdownDefault,
     dropzoneDefault,
     dropzoneTitled,
@@ -211,5 +213,14 @@
 {#snippet tooltipDefault(_controls: RuleControls)}
   <Tooltip text="Save the changes"
     >{#snippet trigger(props)}<Button {...props}>Save</Button>{/snippet}</Tooltip
+  >
+{/snippet}
+
+{#snippet drawerDefault(controls: RuleControls)}
+  <Drawer
+    title="Filters"
+    bind:open={controls.open}
+    wrapFocus={controls.wrapFocus}
+    onclose={controls.record('onclose')}>Body</Drawer
   >
 {/snippet}

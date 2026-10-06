@@ -20,6 +20,7 @@
   import Diagram from '../components/Diagram.svelte';
   import Divider from '../components/Divider.svelte';
   import Dock from '../components/Dock.svelte';
+  import Drawer from '../components/Drawer.svelte';
   import Dropdown from '../components/Dropdown.svelte';
   import DropdownItem from '../components/DropdownItem.svelte';
   import DropdownLabel from '../components/DropdownLabel.svelte';
@@ -217,6 +218,10 @@
     dockRail,
     dockSheet,
     dockPeek,
+    drawerDefault,
+    drawerStart,
+    drawerBottom,
+    drawerFooter,
     dropdownDefault,
     dropdownIcon,
     dropdownIconWithoutTooltip,
@@ -1499,4 +1504,14 @@
 
 {#snippet tooltipDefault()}<Tooltip text="Save the changes"
     >{#snippet trigger(props)}<Button {...props}>Save</Button>{/snippet}</Tooltip
+  >{/snippet}
+
+{#snippet drawerDefault()}<Drawer title="Filters">Body</Drawer>{/snippet}
+
+{#snippet drawerStart()}<Drawer title="Filters" side="start">Body</Drawer>{/snippet}
+
+{#snippet drawerBottom()}<Drawer title="Filters" side="bottom">Body</Drawer>{/snippet}
+
+{#snippet drawerFooter()}<Drawer title="Filters"
+    >Body{#snippet footer()}<Button>Cancel</Button>{/snippet}</Drawer
   >{/snippet}
