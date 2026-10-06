@@ -231,7 +231,7 @@ every fixture already is in it.
 `normalizedMarkup` in `contract/normalize.js` reduces both sides to one string before they are
 compared. It ignores what differs between frameworks and does not change what the user gets:
 
-- comments (such as hydration markers);
+- comments (such as hydration markers), the empty comment `<!>` among them;
 - the self-closing form (`<path />` and `<path></path>`, `<input />` and `<input>`);
 - white space next to a tag, and any run of white space elsewhere (collapsed to one space);
 - the order of attributes, of class names and of style declarations, and the spacing inside a
@@ -382,9 +382,11 @@ The specs fail until the stylesheet, `index.css` and `THEMES` agree. A new theme
 
 1. Add its stylesheet under `styles/components/` and import it in `styles/index.css` into the
    `components` layer. Every custom property it reads at runtime gets a fallback.
-2. Add one fixture per variant under `fixtures/<component>/`. Write it with the framework version
-   that implements the component first: render each variant, pass the markup through
-   `fixtureText`, and save it. Never write a fixture by hand that no component renders.
+2. Add one fixture per variant under `fixtures/<component>/`. When a framework version already
+   implements the component, render each variant, pass the markup through `fixtureText`, and save
+   it. A new component's fixtures may be written first, by hand and passed through `fixtureText`,
+   so the framework versions are built to them; before the release that adds them, each must match
+   the first framework version's render, and a fixture that does not is changed in that release.
 3. If it runs a script, add `rules/<component>.json`.
 
 ### A fixture
@@ -399,8 +401,8 @@ Render the variant in a framework version, write `fixtureText(rendered)` to
 - `appearance.test.js`, `theme-boot.test.js`: the appearance functions, the first-paint script's
   behaviour and its exact text, and that `THEMES` matches the theme stylesheets.
 - `contract/*.test.js`: the normalizer, the formatter and the comparison.
-- `fixtures/fixtures.test.js`: every fixture is at a valid path, in canonical form, balanced, uses
-  only placeholder ids, and names only classes the stylesheets define.
+- `fixtures/fixtures.test.js`: every fixture is at a valid path, in canonical form, holds no
+  comment, is balanced, uses only placeholder ids, and names only classes the stylesheets define.
 - `rules/rules.test.js`: every rules file is well formed, names a fixture that exists, starts
   from elements its fixture holds, and explains every uncertain rule.
 - `icons/icons.test.js`: every icon is one SVG root with the expected attributes and shape
