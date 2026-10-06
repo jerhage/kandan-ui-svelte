@@ -139,6 +139,8 @@ const RULE_SUBJECTS: Readonly<Record<string, RuleSubject>> = {
   'carousel/default': { render: subjects.carouselDefault, layout: CAROUSEL_LAYOUT },
   'carousel/driven': { render: subjects.carouselDriven, layout: CAROUSEL_LAYOUT },
   'code-block/copy': { render: subjects.codeBlockCopy },
+  'combobox/default': { render: subjects.comboboxDefault },
+  'combobox/selected': { render: subjects.comboboxSelected },
   'dock/sheet': { render: subjects.dockSheet, layout: DOCK_SHEET_LAYOUT },
   'dock/side': { render: subjects.dockSide },
   'drawer/default': { render: subjects.drawerDefault, reach: reachDrawer },

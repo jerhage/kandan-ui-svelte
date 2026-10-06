@@ -16,6 +16,7 @@
   import Checkbox from '../components/Checkbox.svelte';
   import ChromeBar from '../components/ChromeBar.svelte';
   import CodeBlock from '../components/CodeBlock.svelte';
+  import Combobox from '../components/Combobox.svelte';
   import CommandItem from '../components/CommandItem.svelte';
   import Diagram from '../components/Diagram.svelte';
   import Divider from '../components/Divider.svelte';
@@ -87,6 +88,7 @@
     ENTRIES,
     FILES,
     HINTS,
+    LANGUAGES,
     NAMES,
     NODES,
     OPTIONS,
@@ -202,6 +204,11 @@
     codeBlockLabelled,
     codeBlockCopy,
     codeBlockCopied,
+    comboboxDefault,
+    comboboxSelected,
+    comboboxEmpty,
+    comboboxDisabled,
+    comboboxHiddenLabel,
     commandItemButton,
     commandItemLink,
     commandItemStatic,
@@ -1515,3 +1522,17 @@
 {#snippet drawerFooter()}<Drawer title="Filters"
     >Body{#snippet footer()}<Button>Cancel</Button>{/snippet}</Drawer
   >{/snippet}
+
+{#snippet comboboxDefault()}<Combobox label="Language" options={LANGUAGES} />{/snippet}
+
+{#snippet comboboxSelected()}<Combobox label="Language" options={LANGUAGES} value="ko" />{/snippet}
+
+{#snippet comboboxEmpty()}<Combobox label="Language" options={LANGUAGES} query="Latin" />{/snippet}
+
+{#snippet comboboxDisabled()}<Combobox label="Language" options={LANGUAGES} disabled />{/snippet}
+
+{#snippet comboboxHiddenLabel()}<Combobox
+    label="Language"
+    options={LANGUAGES}
+    hideLabel
+  />{/snippet}

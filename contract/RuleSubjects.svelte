@@ -4,6 +4,7 @@
   import Button from '../components/Button.svelte';
   import Carousel from '../components/Carousel.svelte';
   import CodeBlock from '../components/CodeBlock.svelte';
+  import Combobox from '../components/Combobox.svelte';
   import Dock from '../components/Dock.svelte';
   import Drawer from '../components/Drawer.svelte';
   import Dropdown from '../components/Dropdown.svelte';
@@ -21,7 +22,7 @@
   import ToastRegion from '../components/ToastRegion.svelte';
   import Tooltip from '../components/Tooltip.svelte';
   import WindowDropzone from '../components/WindowDropzone.svelte';
-  import { ENTRIES, SLIDES, TABS, TABS_WITH_DISABLED } from './case-data';
+  import { ENTRIES, LANGUAGES, SLIDES, TABS, TABS_WITH_DISABLED } from './case-data';
   import type { RuleControls } from './rule-controls.svelte';
 
   export {
@@ -31,6 +32,8 @@
     carouselDefault,
     carouselDriven,
     codeBlockCopy,
+    comboboxDefault,
+    comboboxSelected,
     dockSheet,
     dockSide,
     drawerDefault,
@@ -223,4 +226,17 @@
     wrapFocus={controls.wrapFocus}
     onclose={controls.record('onclose')}>Body</Drawer
   >
+{/snippet}
+
+{#snippet comboboxDefault(controls: RuleControls)}
+  <Combobox label="Language" options={LANGUAGES} onchoose={controls.record('onchoose')} />
+{/snippet}
+
+{#snippet comboboxSelected(controls: RuleControls)}
+  <Combobox
+    label="Language"
+    options={LANGUAGES}
+    value="ko"
+    onchoose={controls.record('onchoose')}
+  />
 {/snippet}
