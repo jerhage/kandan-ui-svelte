@@ -28,7 +28,11 @@
     An "On this page" list. <code>contentsEntries</code> turns headings into anchors, numbering a
     repeated one: {ENTRIES.map((entry) => entry.href).join(', ')}.
   </p>
-  <Card class="w-sm">
-    <TableOfContents entries={ENTRIES} heading="h3" />
-  </Card>
+  <div class="layout-sidebar">
+    <div class="layout-sidebar-aside">
+      <Card>
+        <TableOfContents entries={ENTRIES} heading="h3" />
+      </Card>
+    </div>
+  </div>
 </DemoSection>
