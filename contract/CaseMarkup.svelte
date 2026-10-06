@@ -276,6 +276,8 @@
     highlightDefault,
     iconButtonDefault,
     iconButtonTooltip,
+    iconButtonHint,
+    iconButtonHintDescribed,
     iconButtonWithoutTooltip,
     iconButtonGhostSm,
     iconButtonLink,
@@ -944,6 +946,15 @@
     icon={Search}
     label="Search"
     tooltip="Search the library"
+  />{/snippet}
+
+{#snippet iconButtonHint()}<IconButton icon={Search} label="Search" hint />{/snippet}
+
+{#snippet iconButtonHintDescribed()}<IconButton
+    icon={Search}
+    label="Search"
+    tooltip="Search the library"
+    hint
   />{/snippet}
 
 {#snippet iconButtonWithoutTooltip()}<IconButton

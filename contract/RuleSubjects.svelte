@@ -13,6 +13,8 @@
   import DropdownLabel from '../components/DropdownLabel.svelte';
   import DropdownSeparator from '../components/DropdownSeparator.svelte';
   import Dropzone from '../components/Dropzone.svelte';
+  import IconButton from '../components/IconButton.svelte';
+  import Search from '../components/icons/Search.svelte';
   import MarqueeSelection from '../components/MarqueeSelection.svelte';
   import Modal from '../components/Modal.svelte';
   import Popover from '../components/Popover.svelte';
@@ -42,6 +44,8 @@
     dropdownDefault,
     dropzoneDefault,
     dropzoneTitled,
+    iconButtonHint,
+    iconButtonHintDescribed,
     marqueeSelectionIdle,
     modalDefault,
     modalFooter,
@@ -213,6 +217,14 @@
 
 {#snippet windowDropzoneIdle(controls: RuleControls)}
   <WindowDropzone onfiles={controls.record('onfiles')}>Drop to add</WindowDropzone>
+{/snippet}
+
+{#snippet iconButtonHint(_controls: RuleControls)}
+  <IconButton icon={Search} label="Search" hint />
+{/snippet}
+
+{#snippet iconButtonHintDescribed(_controls: RuleControls)}
+  <IconButton icon={Search} label="Search" tooltip="Search the library" hint />
 {/snippet}
 
 {#snippet tooltipDefault(_controls: RuleControls)}

@@ -184,6 +184,8 @@ const CASES: readonly ContractCase[] = [
   { path: 'highlight/default', render: markup.highlightDefault },
   { path: 'icon-button/default', render: markup.iconButtonDefault },
   { path: 'icon-button/tooltip', render: markup.iconButtonTooltip },
+  { path: 'icon-button/hint', render: markup.iconButtonHint },
+  { path: 'icon-button/hint-described', render: markup.iconButtonHintDescribed },
   { path: 'icon-button/without-tooltip', render: markup.iconButtonWithoutTooltip },
   { path: 'icon-button/ghost-sm', render: markup.iconButtonGhostSm },
   { path: 'icon-button/link', render: markup.iconButtonLink },

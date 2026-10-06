@@ -148,6 +148,8 @@ const RULE_SUBJECTS: Readonly<Record<string, RuleSubject>> = {
   'dropdown/default': { render: subjects.dropdownDefault, reach: reachOpenDropdown },
   'dropzone/default': { render: subjects.dropzoneDefault, reach: reachDragOver },
   'dropzone/titled': { render: subjects.dropzoneTitled, reach: reachDragOver },
+  'icon-button/hint': { render: subjects.iconButtonHint },
+  'icon-button/hint-described': { render: subjects.iconButtonHintDescribed },
   'marquee-selection/idle': {
     render: subjects.marqueeSelectionIdle,
     connect: forwardMarqueePointers,
