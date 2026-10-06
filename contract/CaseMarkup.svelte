@@ -18,6 +18,7 @@
   import CodeBlock from '../components/CodeBlock.svelte';
   import Combobox from '../components/Combobox.svelte';
   import CommandItem from '../components/CommandItem.svelte';
+  import ContextMenu from '../components/ContextMenu.svelte';
   import Diagram from '../components/Diagram.svelte';
   import Divider from '../components/Divider.svelte';
   import Dock from '../components/Dock.svelte';
@@ -214,6 +215,7 @@
     commandItemStatic,
     commandItemSelected,
     commandItemHint,
+    contextMenuDefault,
     diagramDefault,
     diagramBoxesOnly,
     dividerDefault,
@@ -1536,3 +1538,9 @@
     options={LANGUAGES}
     hideLabel
   />{/snippet}
+
+{#snippet contextMenuDefault()}<ContextMenu label="Report actions"
+    ><Button>Report</Button>{#snippet menu()}<DropdownItem>Open</DropdownItem><DropdownItem
+        >Rename</DropdownItem
+      ><DropdownSeparator /><DropdownItem danger>Delete</DropdownItem>{/snippet}</ContextMenu
+  >{/snippet}

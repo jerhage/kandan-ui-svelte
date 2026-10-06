@@ -5,6 +5,7 @@
   import Carousel from '../components/Carousel.svelte';
   import CodeBlock from '../components/CodeBlock.svelte';
   import Combobox from '../components/Combobox.svelte';
+  import ContextMenu from '../components/ContextMenu.svelte';
   import Dock from '../components/Dock.svelte';
   import Drawer from '../components/Drawer.svelte';
   import Dropdown from '../components/Dropdown.svelte';
@@ -34,6 +35,7 @@
     codeBlockCopy,
     comboboxDefault,
     comboboxSelected,
+    contextMenuDefault,
     dockSheet,
     dockSide,
     drawerDefault,
@@ -239,4 +241,12 @@
     value="ko"
     onchoose={controls.record('onchoose')}
   />
+{/snippet}
+
+{#snippet contextMenuDefault(_controls: RuleControls)}
+  <ContextMenu label="Report actions"
+    ><Button>Report</Button>{#snippet menu()}<DropdownItem>Open</DropdownItem><DropdownItem
+        >Rename</DropdownItem
+      ><DropdownSeparator /><DropdownItem danger>Delete</DropdownItem>{/snippet}</ContextMenu
+  >
 {/snippet}
