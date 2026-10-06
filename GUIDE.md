@@ -550,6 +550,13 @@ component marks the entry of the section being read with `aria-current="location
   key on a focused element inside it opens the menu below that element. Choosing an item or Escape
   closes it and returns focus to the element that had it.
 
+Every anchored overlay (the `Popover`, the `Dropdown` and `ContextMenu` menus, the `Tooltip` and the
+`Combobox` list) is placed again while it is open on scroll, on resize, and whenever its own size
+changes: `followAnchor` in `anchor-tracking.ts` takes the overlay and watches it with a
+`ResizeObserver`. So an overlay above its anchor keeps its bottom one gap above the anchor as its
+content, items, text or shown options grow or shrink, and moves to the other side once the
+placement rule puts it there.
+
 ## Adding a theme
 
 A theme is added in the core (its guide lists the steps: the stylesheet, its import in
