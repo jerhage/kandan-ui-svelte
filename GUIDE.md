@@ -20,9 +20,9 @@ The folder holds:
 - `playground/`: a page that shows every component and utility, for an app to mount on a
   development route.
 - `scripts/`: `generate-icons.js`, which writes the icon components.
-- `package.json`, `vitest.config.ts`, `vitest.browser.config.ts`, `tsconfig.json`,
-  `.oxlintrc.json`, `.oxfmtrc.json`, `.gitignore` and `.github/`: the library's own tooling, used
-  in the library's repository. An app that vendors the library ignores them (see
+- `package.json`, `vite.config.ts`, `vitest.config.ts`, `vitest.browser.config.ts`,
+  `tsconfig.json`, `.oxlintrc.json`, `.oxfmtrc.json`, `.gitignore` and `.github/`: the library's
+  own tooling, used in the library's repository. An app that vendors the library ignores them (see
   [Apps ignore the library's tooling](#apps-ignore-the-librarys-tooling)).
 
 Every file reaches the others by relative path. Nothing imports an app alias such as `$lib`, so
@@ -148,6 +148,9 @@ Any package manager that reads `package.json` works the same way (`pnpm install`
 
 The scripts:
 
+- `npm run dev`: serves the playground with Vite (`vite.config.ts`, rooted at `playground/`), at
+  the address Vite prints. Its header holds a theme and a colour scheme picker, saved under the
+  placeholder keys `kandan.theme` and `kandan.color-scheme`.
 - `npm run test`: every unit spec, once. `npm run test:unit` runs the `unit` project alone, and
   `npm run test:watch` watches.
 - `npm run test:core`: the core's own specs, with `node --test`. They need no dependency.
@@ -263,16 +266,18 @@ looking for them:
   }
   ```
 
-- dependency-cruiser, if the app uses it. `vitest.config.ts` and `vitest.browser.config.ts`
-  import `@sveltejs/vite-plugin-svelte` and `@vitest/browser-playwright`, which a rule that keeps
-  the folder to `svelte`, `ts-pattern` and `vitest` would refuse. They are tooling, not library
-  code, so exclude them, with the generator script and the core's own specs:
+- dependency-cruiser, if the app uses it. `vite.config.ts`, `vitest.config.ts` and
+  `vitest.browser.config.ts` import `vite`, `@sveltejs/vite-plugin-svelte` and
+  `@vitest/browser-playwright`, which a rule that keeps the folder to `svelte`, `ts-pattern` and
+  `vitest` would refuse. They are tooling, not library code, so exclude them, with the generator
+  script and the core's own specs:
 
   ```js
   options: {
     exclude: {
       path: [
         '^src/lib/ui/vitest(\\.browser)?\\.config\\.ts$',
+        '^src/lib/ui/vite\\.config\\.ts$',
         '^src/lib/ui/scripts/',
         '^src/lib/ui/core/.*\\.test\\.js$',
       ],
