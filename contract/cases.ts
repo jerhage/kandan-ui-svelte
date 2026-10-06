@@ -217,6 +217,7 @@ const CASES: readonly ContractCase[] = [
   { path: 'modal/lg', render: markup.modalLg },
   { path: 'modal/top', render: markup.modalTop },
   { path: 'modal/fill-narrow', render: markup.modalFillNarrow },
+  { path: 'modal/sheet', render: markup.modalSheet },
   { path: 'modal/flush-body', render: markup.modalFlushBody },
   { path: 'modal/footer', render: markup.modalFooter },
   { path: 'modal/info-footer', render: markup.modalInfoFooter },

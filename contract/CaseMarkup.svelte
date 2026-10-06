@@ -309,6 +309,7 @@
     modalLg,
     modalTop,
     modalFillNarrow,
+    modalSheet,
     modalFlushBody,
     modalFooter,
     modalInfoFooter,
@@ -1043,6 +1044,8 @@
 {#snippet modalTop()}<Modal title="Rename" placement="top">Body</Modal>{/snippet}
 
 {#snippet modalFillNarrow()}<Modal title="Rename" fillNarrow>Body</Modal>{/snippet}
+
+{#snippet modalSheet()}<Modal title="Rename" sheetNarrow>Body</Modal>{/snippet}
 
 {#snippet modalFlushBody()}<Modal title="Rename" flushBody>Body</Modal>{/snippet}
 
