@@ -206,6 +206,10 @@ commands in `contract/rule-input.ts`, so Chromium receives trusted input and run
 actions: a summary toggles, a dialog cancels, a popover is light dismissed, a button takes focus.
 A drag is the exception: the runner dispatches drag events it builds, so a rule that checks the
 drop effect, which only a drag the browser runs carries, is listed as a todo with that reason.
+A `scroll` in a rule brings the element its `to` names to the top of the area that scrolls it, with
+`scrollIntoView({ block: 'start' })`, so the area fires real scroll events. The table of contents
+subject places a full-height section with a heading for each entry after the component, once it has
+mounted, so its rules also cover headings that reach the page late.
 A `transitionend` in a rule finishes the target's running transitions, so Chromium fires the real
 event with its `propertyName`. A measured style value (`{ "value": 40, "unit": "px",
 "tolerance": 0.5 }`) passes when the written number is within the tolerance, since Vitest scales
@@ -464,6 +468,24 @@ function hashOf(script: string): string {
   return `sha256-${createHash('sha256').update(script, 'utf8').digest('base64')}`;
 }
 ```
+
+### The table of contents
+
+`TableOfContents` links each entry to the element whose id is the entry's `id`, as
+`contentsEntries` makes it, so the page gives each heading that id. As the page scrolls, the
+component marks the entry of the section being read with `aria-current="location"`:
+
+- It reads where each heading sits on every scroll (a capture-phase listener, so the scroll of an
+  inner area such as an app shell's main area counts too) and every resize, and passes the
+  positions to `currentHeading` in `components/table-of-contents.ts`. The current entry is the last
+  heading at or above a reading line a quarter of the way down the area that scrolls the headings;
+  before any heading reaches it, the first entry; once the area is scrolled to its end, the last
+  heading it shows, so a short last section is reached.
+- A heading that is not on the page yet is skipped. While any is missing, a `MutationObserver` on
+  the body waits for it and disconnects once every heading is placed. A change of `entries` starts
+  over, and unmounting removes every listener.
+- `current` is bindable: bind it to read the entry being read, or pass it to render a current entry
+  before any script runs (a server render has none otherwise).
 
 ## Adding a theme
 
