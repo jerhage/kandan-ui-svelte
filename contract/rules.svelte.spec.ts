@@ -259,6 +259,7 @@ async function fire(trigger: Trigger, run: Run): Promise<void> {
       vi.advanceTimersByTime(trigger.ms ?? 0);
       break;
     case 'animationsend':
+    case 'transitionend':
       await finishAnimations(eventTarget(trigger.target, run.root));
       break;
     case 'toggle':

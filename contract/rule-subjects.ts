@@ -20,7 +20,10 @@ type RuleSubject = {
   readonly coarsePointer?: boolean;
 };
 
-const CAROUSEL_LAYOUT = '.carousel { block-size: 12rem; }';
+const CAROUSEL_LAYOUT = '.carousel { block-size: 12rem; inline-size: 20rem; }';
+
+const DOCK_SHEET_LAYOUT =
+  'div:has(> .dock-sheet) { display: flex; flex-direction: column; justify-content: flex-end; block-size: 100dvh; }';
 
 const MARQUEE_POINTER_EVENTS = [
   'pointerdown',
@@ -108,7 +111,7 @@ const RULE_SUBJECTS: Readonly<Record<string, RuleSubject>> = {
   'carousel/default': { render: subjects.carouselDefault, layout: CAROUSEL_LAYOUT },
   'carousel/driven': { render: subjects.carouselDriven, layout: CAROUSEL_LAYOUT },
   'code-block/copy': { render: subjects.codeBlockCopy },
-  'dock/sheet': { render: subjects.dockSheet },
+  'dock/sheet': { render: subjects.dockSheet, layout: DOCK_SHEET_LAYOUT },
   'dock/side': { render: subjects.dockSide },
   'dropdown/default': { render: subjects.dropdownDefault, reach: reachOpenDropdown },
   'dropzone/default': { render: subjects.dropzoneDefault, reach: reachDragOver },
