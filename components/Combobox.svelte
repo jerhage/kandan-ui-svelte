@@ -219,7 +219,7 @@
           {option.label}
         </div>
       {:else}
-        <div class="combobox-empty" role="option" aria-disabled="true">
+        <div class="combobox-empty" role="option" aria-selected="false" aria-disabled="true">
           {emptyLabel}
         </div>
       {/each}
