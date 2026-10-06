@@ -149,8 +149,8 @@ Any package manager that reads `package.json` works the same way (`pnpm install`
 The scripts:
 
 - `npm run dev`: serves the playground with Vite (`vite.config.ts`, rooted at `playground/`), at
-  the address Vite prints. Its header holds a theme and a colour scheme picker, saved under the
-  placeholder keys `kandan.theme` and `kandan.color-scheme`.
+  the address Vite prints. Its header holds the appearance switcher, which saves the choice under
+  the placeholder keys `kandan.theme` and `kandan.color-scheme`.
 - `npm run test`: every unit spec, once. `npm run test:unit` runs the `unit` project alone, and
   `npm run test:watch` watches.
 - `npm run test:core`: the core's own specs, with `node --test`. They need no dependency.
