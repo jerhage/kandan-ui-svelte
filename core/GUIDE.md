@@ -295,7 +295,7 @@ the framework renders it.
 ## The behaviour rules
 
 `rules/<component>.json` describes what a component's script (or a native element) does, for
-the seventeen components that have one. A rule is a state before, an event, and a state after,
+the twenty-one components that have one. A rule is a state before, an event, and a state after,
 read against a fixture:
 
 ```json
@@ -319,10 +319,11 @@ read against a fixture:
 - `fixture` is the starting markup. `given` adds state on top of it (focus, an open popover);
   `options` names settings that change no markup (`{ "wrapFocus": true }`).
 - `when` is a list of triggers. `event` is a DOM event (`click`, `keydown` with `key`,
-  `pointerdown`, `dragenter` with `files`, …), or one of: `set` (a prop or setting changes:
-  `prop`, `value`), `call` (a method is called: `method`, `value`), `time` (`ms` pass), `mount`,
-  `unmount`, `animationsend` (the element's running animations finish), `scroll` (`to`).
-  `target` is a selector, or `window` or `document`.
+  `pointerdown`, `contextmenu`, `dragenter` with `files`, …), or one of: `set` (a prop or setting
+  changes: `prop`, `value`), `call` (a method is called: `method`, `value`), `time` (`ms` pass),
+  `mount`, `unmount`, `animationsend` (the element's running animations finish), `scroll` (`to`).
+  `target` is a selector, or `window` or `document`. A `contextmenu` is the secondary button's
+  press, as a user makes it, not a dispatched event.
 - A `scroll` names, in `to`, the element it brings to the top of the area that scrolls it, as
   `element.scrollIntoView({ block: 'start' })` does; the area then fires its own scroll events. It
   states a place, not a distance, so the rule holds whatever layout the page gives the content
@@ -334,7 +335,15 @@ read against a fixture:
 - `then` lists element states after the triggers: `attributes` (a value, or `null` for absent),
   `classes` (present or not), `style` (a custom property's value, `set` for any value, `null`, or
   a measured value), `properties` (DOM properties such as `value`), `focused`, `open` (a popover
-  or a dialog is open) and `present` (the element exists).
+  or a dialog is open), `present` (the element exists) and `references`.
+- `references` maps an attribute that holds a generated id to a selector: the attribute must hold
+  the id of the element the selector finds. It states what a value cannot, since the id differs
+  from one render to the next:
+
+  ```json
+  "references": { "aria-activedescendant": ".combobox-option:nth-child(2)" }
+  ```
+
 - A measured value states a number the component computes from the pointer or the layout, which
   a host that scales the page can move by a fraction of a pixel. It names the number, its unit and
   how far the written value may differ from it:
