@@ -5,6 +5,7 @@
   import Carousel from '../components/Carousel.svelte';
   import CodeBlock from '../components/CodeBlock.svelte';
   import Combobox from '../components/Combobox.svelte';
+  import { createContextMenuAreas } from '../components/context-menu-areas';
   import ContextMenu from '../components/ContextMenu.svelte';
   import Dock from '../components/Dock.svelte';
   import Drawer from '../components/Drawer.svelte';
@@ -19,13 +20,18 @@
   import Modal from '../components/Modal.svelte';
   import Popover from '../components/Popover.svelte';
   import SearchField from '../components/SearchField.svelte';
+  import Table from '../components/Table.svelte';
+  import TableBody from '../components/TableBody.svelte';
+  import TableCell from '../components/TableCell.svelte';
   import TableOfContents from '../components/TableOfContents.svelte';
+  import TableRow from '../components/TableRow.svelte';
   import Tabs from '../components/Tabs.svelte';
   import Toast from '../components/Toast.svelte';
   import ToastRegion from '../components/ToastRegion.svelte';
   import Tooltip from '../components/Tooltip.svelte';
   import WindowDropzone from '../components/WindowDropzone.svelte';
-  import { ENTRIES, LANGUAGES, SLIDES, TABS, TABS_WITH_DISABLED } from './case-data';
+  import { ENTRIES, LANGUAGES, SHELF_BOOK, SLIDES, TABS, TABS_WITH_DISABLED } from './case-data';
+  import type { ShelfBook } from './case-data';
   import type { RuleControls } from './rule-controls.svelte';
 
   export {
@@ -38,6 +44,7 @@
     comboboxDefault,
     comboboxSelected,
     contextMenuDefault,
+    contextMenuAttached,
     dockSheet,
     dockSide,
     drawerDefault,
@@ -259,6 +266,21 @@
   <ContextMenu label="Report actions"
     ><Button>Report</Button>{#snippet menu()}<DropdownItem>Open</DropdownItem><DropdownItem
         >Rename</DropdownItem
+      ><DropdownSeparator /><DropdownItem danger>Delete</DropdownItem>{/snippet}</ContextMenu
+  >
+{/snippet}
+
+{#snippet contextMenuAttached(_controls: RuleControls)}
+  {@const rows = createContextMenuAreas<ShelfBook>()}
+  <Table
+    ><TableBody
+      ><TableRow {@attach rows.area(SHELF_BOOK)}
+        ><TableCell>{SHELF_BOOK.title}</TableCell><TableCell numeric>{SHELF_BOOK.pages}</TableCell
+        ><TableCell actions><Button size="sm">Open</Button></TableCell></TableRow
+      ></TableBody
+    ></Table
+  ><ContextMenu areas={rows} label={(book) => `${book.title} actions`} current={SHELF_BOOK}
+    >{#snippet menu()}<DropdownItem>Open</DropdownItem><DropdownItem>Rename</DropdownItem
       ><DropdownSeparator /><DropdownItem danger>Delete</DropdownItem>{/snippet}</ContextMenu
   >
 {/snippet}

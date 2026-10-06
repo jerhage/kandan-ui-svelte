@@ -142,6 +142,7 @@ const RULE_SUBJECTS: Readonly<Record<string, RuleSubject>> = {
   'combobox/default': { render: subjects.comboboxDefault },
   'combobox/selected': { render: subjects.comboboxSelected },
   'context-menu/default': { render: subjects.contextMenuDefault },
+  'context-menu/attached': { render: subjects.contextMenuAttached },
   'dock/sheet': { render: subjects.dockSheet, layout: DOCK_SHEET_LAYOUT },
   'dock/side': { render: subjects.dockSide },
   'drawer/default': { render: subjects.drawerDefault, reach: reachDrawer },

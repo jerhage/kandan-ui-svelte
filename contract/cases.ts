@@ -124,6 +124,7 @@ const CASES: readonly ContractCase[] = [
   { path: 'command-item/selected', render: markup.commandItemSelected },
   { path: 'command-item/hint', render: markup.commandItemHint },
   { path: 'context-menu/default', render: markup.contextMenuDefault },
+  { path: 'context-menu/attached', render: markup.contextMenuAttached },
   { path: 'diagram/default', render: markup.diagramDefault },
   { path: 'diagram/boxes-only', render: markup.diagramBoxesOnly },
   { path: 'divider/default', render: markup.dividerDefault },
