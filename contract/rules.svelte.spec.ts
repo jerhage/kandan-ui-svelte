@@ -3,7 +3,7 @@ import { flushSync, mount, tick, unmount } from 'svelte';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { commands, userEvent } from 'vitest/browser';
 import { rulesFileProblems } from '../core/rules/schema.js';
-import type { ElementState, Rule, RulesFile, Trigger } from '../core/rules/schema.js';
+import type { ElementState, Measured, Rule, RulesFile, Trigger } from '../core/rules/schema.js';
 import { RuleControls } from './rule-controls.svelte';
 import type { PointerAction, PointerKind } from './rule-input';
 import { RULE_SUBJECTS } from './rule-subjects';
@@ -329,6 +329,21 @@ function styleValue(element: Element, name: string): string {
   return element instanceof HTMLElement ? element.style.getPropertyValue(name).trim() : '';
 }
 
+type StyleValue = string | null | Measured;
+
+function withinTolerance(written: string, measured: Measured): boolean {
+  if (!written.endsWith(measured.unit)) return false;
+  const amount = Number.parseFloat(written.slice(0, written.length - measured.unit.length));
+  return Number.isFinite(amount) && Math.abs(amount - measured.value) <= measured.tolerance;
+}
+
+function styleHolds(element: Element, name: string, value: StyleValue): boolean {
+  const written = styleValue(element, name);
+  if (value === 'set') return written !== '';
+  if (typeof value === 'string' || value === null) return written === (value ?? '');
+  return withinTolerance(written, value);
+}
+
 function holds(state: ElementState): boolean {
   const element = document.querySelector(state.selector);
   if (element === null) return state.present === false;
@@ -340,9 +355,7 @@ function holds(state: ElementState): boolean {
     ([name, present]) => element.classList.contains(name) === present,
   );
   const style = Object.entries(state.style ?? {}).every(([name, value]) =>
-    value === 'set'
-      ? styleValue(element, name) !== ''
-      : styleValue(element, name) === (value ?? ''),
+    styleHolds(element, name, value),
   );
   const properties = Object.entries(state.properties ?? {}).every(
     ([name, value]) => Reflect.get(element, name) === value,
@@ -400,7 +413,15 @@ function expectState(state: ElementState): void {
   for (const [name, value] of Object.entries(state.style ?? {})) {
     const written = styleValue(element, name);
     if (value === 'set') expect(written, `${state.selector} ${name}`).not.toBe('');
-    else expect(written, `${state.selector} ${name}`).toBe(value ?? '');
+    else if (typeof value === 'string' || value === null) {
+      expect(written, `${state.selector} ${name}`).toBe(value ?? '');
+    } else {
+      const within = `${value.value}${value.unit} within ${value.tolerance}`;
+      expect(
+        withinTolerance(written, value),
+        `${state.selector} ${name} is ${written}, not ${within}`,
+      ).toBe(true);
+    }
   }
   for (const [name, value] of Object.entries(state.properties ?? {})) {
     expect(Reflect.get(element, name), `${state.selector} .${name}`).toBe(value);
