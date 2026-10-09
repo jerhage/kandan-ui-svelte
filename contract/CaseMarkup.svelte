@@ -328,6 +328,8 @@
     keyHintsText,
     keyHintsSm,
     keyHintsDecorativeFooter,
+    linkPlain,
+    linkTitle,
     listGroupDefault,
     listGroupTitled,
     listGroupInsetH3,
@@ -1128,6 +1130,11 @@
     decorative
     hints={HINTS}
   />{/snippet}
+
+{#snippet linkPlain()}<a class="link-plain" href="/">Home</a>{/snippet}
+
+{#snippet linkTitle()}<a class="link-plain" href="/guide"><strong>A card title</strong></a
+  >{/snippet}
 
 {#snippet listGroupDefault()}<ListGroup><ListRow title="Theme" value="Ember" /></ListGroup
   >{/snippet}

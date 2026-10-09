@@ -212,6 +212,8 @@ const CASES: readonly ContractCase[] = [
   { path: 'key-hints/text', render: markup.keyHintsText },
   { path: 'key-hints/sm', render: markup.keyHintsSm },
   { path: 'key-hints/decorative-footer', render: markup.keyHintsDecorativeFooter },
+  { path: 'link/plain', render: markup.linkPlain },
+  { path: 'link/title', render: markup.linkTitle },
   { path: 'list-group/default', render: markup.listGroupDefault },
   { path: 'list-group/titled', render: markup.listGroupTitled },
   { path: 'list-group/inset-h3', render: markup.listGroupInsetH3 },
