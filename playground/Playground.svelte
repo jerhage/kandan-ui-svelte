@@ -64,6 +64,7 @@
   import StatusIconSection from './StatusIconSection.svelte';
   import PacketLayoutSection from './PacketLayoutSection.svelte';
   import SequenceDiagramSection from './SequenceDiagramSection.svelte';
+  import StepThroughSection from './StepThroughSection.svelte';
   import StepListSection from './StepListSection.svelte';
   import StepperSection from './StepperSection.svelte';
   import TableOfContentsSection from './TableOfContentsSection.svelte';
@@ -140,6 +141,7 @@
     DiagramSection,
     SequenceDiagramSection,
     PacketLayoutSection,
+    StepThroughSection,
     StepListSection,
     LayoutsIntro,
     PageWrapSection,

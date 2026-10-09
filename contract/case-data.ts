@@ -214,6 +214,19 @@ const PACKET_ROWS: readonly PacketRow[] = [
 
 const PAIR: readonly SequenceParticipant[] = [{ label: 'Client' }, { label: 'Server' }];
 
+const ROUTE_CAPTIONS: readonly string[] = [
+  'The client hands the packet to the router.',
+  'The router looks up where the packet goes next.',
+  'The server receives the packet.',
+];
+
+const HANDSHAKE_CAPTIONS: readonly string[] = [
+  'The client opens by saying which versions it speaks.',
+  'The server answers with its certificate so the client can check who it is talking to.',
+  'The client confirms the handshake.',
+  'The server confirms it too.',
+];
+
 const SLIDES: readonly CarouselSlide[] = [
   { key: 'one', beside: -1 },
   { key: 'two', beside: 0 },
@@ -274,6 +287,7 @@ export {
   EDGES,
   ENTRIES,
   FILES,
+  HANDSHAKE_CAPTIONS,
   HANDSHAKE_PARTICIPANTS,
   HANDSHAKE_STEPS,
   HINTS,
@@ -288,6 +302,7 @@ export {
   PEER_A,
   PEER_B,
   REGION_TOASTER,
+  ROUTE_CAPTIONS,
   ROUTE_SOURCE,
   ROUTE_TARGET,
   SEGMENTS,

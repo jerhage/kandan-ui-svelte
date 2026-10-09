@@ -65,6 +65,7 @@
   import StepItem from '../components/StepItem.svelte';
   import StepList from '../components/StepList.svelte';
   import Stepper from '../components/Stepper.svelte';
+  import StepThrough from '../components/StepThrough.svelte';
   import Table from '../components/Table.svelte';
   import TableBody from '../components/TableBody.svelte';
   import TableCell from '../components/TableCell.svelte';
@@ -86,12 +87,14 @@
   import Ellipsis from '../components/icons/Ellipsis.svelte';
   import LayoutGrid from '../components/icons/LayoutGrid.svelte';
   import Search from '../components/icons/Search.svelte';
+  import { stepEmphasis } from '../components/step-through';
   import {
     ACTIVE_BOX,
     CLEARED_TOASTER,
     EDGES,
     ENTRIES,
     FILES,
+    HANDSHAKE_CAPTIONS,
     HANDSHAKE_PARTICIPANTS,
     HANDSHAKE_STEPS,
     HINTS,
@@ -106,6 +109,7 @@
     PEER_A,
     PEER_B,
     REGION_TOASTER,
+    ROUTE_CAPTIONS,
     ROUTE_SOURCE,
     ROUTE_TARGET,
     SEGMENTS,
@@ -417,6 +421,8 @@
     stepItemDefault,
     stepItemTitleOnlyH4,
     stepListDefault,
+    stepThroughDefault,
+    stepThroughDiagram,
     stepperLinks,
     stepperActionsBlock,
     stepperMissingDisabled,
@@ -1442,6 +1448,80 @@
 
 {#snippet stepListDefault()}<StepList
     ><StepItem title="Pick a file" /><StepItem title="Wait" /></StepList
+  >{/snippet}
+
+{#snippet stepThroughDefault()}<StepThrough
+    label="Handshake, step by step"
+    captions={HANDSHAKE_CAPTIONS}
+    initial={1}
+    >{#snippet children(step)}<SequenceDiagram
+        label="A TLS-like handshake"
+        participants={PAIR}
+        steps={[
+          {
+            kind: 'message',
+            from: 0,
+            to: 1,
+            label: 'ClientHello',
+            emphasis: stepEmphasis(0, step),
+          },
+          {
+            kind: 'message',
+            from: 1,
+            to: 0,
+            label: 'ServerHello, Certificate',
+            emphasis: stepEmphasis(1, step),
+          },
+          { kind: 'message', from: 0, to: 1, label: 'Finished', emphasis: stepEmphasis(2, step) },
+          {
+            kind: 'message',
+            from: 1,
+            to: 0,
+            label: 'Finished',
+            dashed: true,
+            emphasis: stepEmphasis(3, step),
+          },
+        ]}
+      />{/snippet}</StepThrough
+  >{/snippet}
+
+{#snippet stepThroughDiagram()}<StepThrough label="Route, step by step" captions={ROUTE_CAPTIONS}
+    >{#snippet children(step)}{@const client = {
+        kind: 'box',
+        label: 'Client',
+        x: 20,
+        y: 40,
+        width: 120,
+        height: 48,
+        emphasis: stepEmphasis(0, step + 1),
+      } as const}{@const router = {
+        kind: 'box',
+        label: 'Router',
+        tone: 'primary',
+        x: 220,
+        y: 40,
+        width: 120,
+        height: 48,
+        emphasis: stepEmphasis(1, step + 1),
+      } as const}{@const server = {
+        kind: 'box',
+        label: 'Server',
+        x: 420,
+        y: 40,
+        width: 120,
+        height: 48,
+        emphasis: stepEmphasis(2, step + 1),
+      } as const}<Diagram
+        label="Route of a packet"
+        scrollLabel="Route of a packet"
+        width={560}
+        height={120}
+        nodes={[client, router, server]}
+        edges={[
+          { from: client, to: router, label: 'packet', emphasis: stepEmphasis(0, step) },
+          { from: router, to: server, emphasis: stepEmphasis(1, step) },
+        ]}
+      />{/snippet}</StepThrough
   >{/snippet}
 
 {#snippet stepperLinks()}<Stepper

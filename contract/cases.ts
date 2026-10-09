@@ -308,6 +308,8 @@ const CASES: readonly ContractCase[] = [
   { path: 'step-item/default', render: markup.stepItemDefault },
   { path: 'step-item/title-only-h4', render: markup.stepItemTitleOnlyH4 },
   { path: 'step-list/default', render: markup.stepListDefault },
+  { path: 'step-through/default', render: markup.stepThroughDefault },
+  { path: 'step-through/diagram', render: markup.stepThroughDiagram },
   { path: 'stepper/links', render: markup.stepperLinks },
   { path: 'stepper/actions-block', render: markup.stepperActionsBlock },
   { path: 'stepper/missing-disabled', render: markup.stepperMissingDisabled },
