@@ -47,6 +47,7 @@
   import Modal from '../components/Modal.svelte';
   import NavLink from '../components/NavLink.svelte';
   import OverflowList from '../components/OverflowList.svelte';
+  import PacketLayout from '../components/PacketLayout.svelte';
   import PageHeader from '../components/PageHeader.svelte';
   import Pagination from '../components/Pagination.svelte';
   import Popover from '../components/Popover.svelte';
@@ -99,6 +100,8 @@
     NODES,
     OPTIONS,
     OPTIONS_WITH_DISABLED,
+    PACKET_OFFSETS,
+    PACKET_ROWS,
     PAIR,
     PEER_A,
     PEER_B,
@@ -352,6 +355,8 @@
     navLinkIcon,
     overflowListFits,
     overflowListOverflowing,
+    packetDefault,
+    packetActive,
     overflowListInline,
     pageHeaderDefault,
     pageHeaderMetaLang,
@@ -1227,6 +1232,27 @@
     name={(n) => n}
     moreLabel="others">{#snippet item(n)}<Tag>{n}</Tag>{/snippet}</OverflowList
   >{/snippet}
+
+{#snippet packetDefault()}<PacketLayout
+    label="A generic packet header"
+    bits={32}
+    offsets={PACKET_OFFSETS}
+    rows={PACKET_ROWS}
+  />{/snippet}
+
+{#snippet packetActive()}<PacketLayout
+    label="A packet header with one field active"
+    bits={32}
+    offsets={PACKET_OFFSETS}
+    rows={[
+      [
+        { name: 'Version', detail: '4 bits', span: 4 },
+        { name: 'Header length', detail: '4 bits', span: 4 },
+        { name: 'Flags', detail: '8 bits', span: 8, tone: 'primary', emphasis: 'active' },
+        { name: 'Total length', detail: '16 bits', span: 16 },
+      ],
+    ]}
+  />{/snippet}
 
 {#snippet pageHeaderDefault()}<PageHeader title="Settings" />{/snippet}
 

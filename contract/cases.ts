@@ -244,6 +244,8 @@ const CASES: readonly ContractCase[] = [
   { path: 'overflow-list/fits', render: markup.overflowListFits },
   { path: 'overflow-list/overflowing', render: markup.overflowListOverflowing },
   { path: 'overflow-list/inline', render: markup.overflowListInline },
+  { path: 'packet/default', render: markup.packetDefault },
+  { path: 'packet/active', render: markup.packetActive },
   { path: 'page-header/default', render: markup.pageHeaderDefault },
   { path: 'page-header/meta-lang', render: markup.pageHeaderMetaLang },
   { path: 'page-header/back', render: markup.pageHeaderBack },

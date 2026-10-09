@@ -10,6 +10,7 @@ import type {
 import type { FileItemData } from '../components/file-item';
 import type { HighlightSegment } from '../components/highlight';
 import type { KeyHint } from '../components/key-hints';
+import type { PacketRow } from '../components/packet';
 import type { SegmentOption } from '../components/segmented-control';
 import type { SequenceParticipant, SequenceStep } from '../components/sequence';
 import type { ContentsEntry } from '../components/table-of-contents';
@@ -187,6 +188,30 @@ const HANDSHAKE_STEPS: readonly SequenceStep[] = [
   { kind: 'message', from: 1, to: 0, label: 'Finished', dashed: true },
 ];
 
+const PACKET_OFFSETS: readonly number[] = [0, 8, 16, 24];
+
+const PACKET_ROWS: readonly PacketRow[] = [
+  [
+    { name: 'Version', detail: '4 bits', span: 4, tone: 'primary' },
+    { name: 'Header length', detail: '4 bits', span: 4, tone: 'primary' },
+    { name: 'Flags', detail: '8 bits', span: 8, tone: 'accent' },
+    { name: 'Total length', detail: '16 bits', span: 16 },
+  ],
+  [
+    { name: 'Identification', detail: '16 bits', span: 16 },
+    { name: 'Fragment', detail: '3 bits', span: 3, tone: 'warning' },
+    { name: 'Offset', detail: '13 bits', span: 13, tone: 'warning' },
+  ],
+  [
+    { name: 'Lifetime', detail: '8 bits', span: 8, tone: 'success' },
+    { name: 'Protocol', detail: '8 bits', span: 8 },
+    { name: 'Checksum', detail: '16 bits', span: 16, tone: 'danger' },
+  ],
+  [{ name: 'Source address', detail: '32 bits', span: 32 }],
+  [{ name: 'Destination address', detail: '32 bits', span: 32 }],
+  [{ name: 'Options', detail: 'variable', span: 32 }],
+];
+
 const PAIR: readonly SequenceParticipant[] = [{ label: 'Client' }, { label: 'Server' }];
 
 const SLIDES: readonly CarouselSlide[] = [
@@ -257,6 +282,8 @@ export {
   NODES,
   OPTIONS,
   OPTIONS_WITH_DISABLED,
+  PACKET_OFFSETS,
+  PACKET_ROWS,
   PAIR,
   PEER_A,
   PEER_B,
