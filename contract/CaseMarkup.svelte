@@ -52,6 +52,7 @@
   import Popover from '../components/Popover.svelte';
   import Progress from '../components/Progress.svelte';
   import Radio from '../components/Radio.svelte';
+  import SequenceDiagram from '../components/SequenceDiagram.svelte';
   import SearchField from '../components/SearchField.svelte';
   import SegmentedControl from '../components/SegmentedControl.svelte';
   import Select from '../components/Select.svelte';
@@ -90,12 +91,15 @@
     EDGES,
     ENTRIES,
     FILES,
+    HANDSHAKE_PARTICIPANTS,
+    HANDSHAKE_STEPS,
     HINTS,
     LANGUAGES,
     NAMES,
     NODES,
     OPTIONS,
     OPTIONS_WITH_DISABLED,
+    PAIR,
     PEER_A,
     PEER_B,
     REGION_TOASTER,
@@ -382,6 +386,8 @@
     segmentedControlTrackDisabledOption,
     segmentedControlUnlabelled,
     selectDefault,
+    sequenceDefault,
+    sequenceActive,
     settingsRowDefault,
     skeletonDefault,
     skeletonText,
@@ -1334,6 +1340,22 @@
 {#snippet selectDefault()}<Select
     ><option value="a">Newest</option><option value="b">Oldest</option></Select
   >{/snippet}
+
+{#snippet sequenceDefault()}<SequenceDiagram
+    label="A TLS-like handshake"
+    participants={HANDSHAKE_PARTICIPANTS}
+    steps={HANDSHAKE_STEPS}
+  />{/snippet}
+
+{#snippet sequenceActive()}<SequenceDiagram
+    label="A highlighted step"
+    participants={PAIR}
+    steps={[
+      { kind: 'message', from: 0, to: 1, label: 'ClientHello' },
+      { kind: 'message', from: 1, to: 0, label: 'ServerHello', emphasis: 'active' },
+      { kind: 'note', from: 0, to: 1, text: 'Keys are agreed', emphasis: 'active' },
+    ]}
+  />{/snippet}
 
 {#snippet settingsRowDefault()}<SettingsRow label="Theme"
     ><Button size="sm">Ember</Button></SettingsRow

@@ -280,6 +280,8 @@ const CASES: readonly ContractCase[] = [
   },
   { path: 'segmented-control/unlabelled', render: markup.segmentedControlUnlabelled },
   { path: 'select/default', render: markup.selectDefault },
+  { path: 'sequence/default', render: markup.sequenceDefault },
+  { path: 'sequence/active', render: markup.sequenceActive },
   { path: 'settings-row/default', render: markup.settingsRowDefault },
   { path: 'skeleton/default', render: markup.skeletonDefault },
   { path: 'skeleton/text', render: markup.skeletonText },

@@ -11,6 +11,7 @@ import type { FileItemData } from '../components/file-item';
 import type { HighlightSegment } from '../components/highlight';
 import type { KeyHint } from '../components/key-hints';
 import type { SegmentOption } from '../components/segmented-control';
+import type { SequenceParticipant, SequenceStep } from '../components/sequence';
 import type { ContentsEntry } from '../components/table-of-contents';
 import type { TabItem } from '../components/tabs';
 import { Toaster } from '../components/toaster.svelte';
@@ -169,6 +170,25 @@ const WIDE_STORE: DiagramBox = {
   height: 48,
 };
 
+const HANDSHAKE_PARTICIPANTS: readonly SequenceParticipant[] = [
+  { label: 'Client', tone: 'primary' },
+  { label: 'Server', tone: 'accent' },
+  { label: 'Authority' },
+];
+
+const HANDSHAKE_STEPS: readonly SequenceStep[] = [
+  { kind: 'message', from: 0, to: 1, label: 'ClientHello' },
+  { kind: 'message', from: 1, to: 0, label: 'ServerHello, Certificate' },
+  { kind: 'message', from: 0, to: 2, label: 'Check the certificate' },
+  { kind: 'message', from: 2, to: 0, label: 'Valid', dashed: true },
+  { kind: 'message', from: 0, to: 0, label: 'Derive the session keys' },
+  { kind: 'note', from: 0, to: 1, text: 'Both sides now hold the session keys' },
+  { kind: 'message', from: 0, to: 1, label: 'Finished' },
+  { kind: 'message', from: 1, to: 0, label: 'Finished', dashed: true },
+];
+
+const PAIR: readonly SequenceParticipant[] = [{ label: 'Client' }, { label: 'Server' }];
+
 const SLIDES: readonly CarouselSlide[] = [
   { key: 'one', beside: -1 },
   { key: 'two', beside: 0 },
@@ -229,12 +249,15 @@ export {
   EDGES,
   ENTRIES,
   FILES,
+  HANDSHAKE_PARTICIPANTS,
+  HANDSHAKE_STEPS,
   HINTS,
   LANGUAGES,
   NAMES,
   NODES,
   OPTIONS,
   OPTIONS_WITH_DISABLED,
+  PAIR,
   PEER_A,
   PEER_B,
   REGION_TOASTER,

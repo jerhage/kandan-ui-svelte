@@ -62,6 +62,7 @@
   import SplitSection from './SplitSection.svelte';
   import StatSection from './StatSection.svelte';
   import StatusIconSection from './StatusIconSection.svelte';
+  import SequenceDiagramSection from './SequenceDiagramSection.svelte';
   import StepListSection from './StepListSection.svelte';
   import StepperSection from './StepperSection.svelte';
   import TableOfContentsSection from './TableOfContentsSection.svelte';
@@ -136,6 +137,7 @@
     FigureSection,
     TableOfContentsSection,
     DiagramSection,
+    SequenceDiagramSection,
     StepListSection,
     LayoutsIntro,
     PageWrapSection,
