@@ -85,6 +85,7 @@
   import LayoutGrid from '../components/icons/LayoutGrid.svelte';
   import Search from '../components/icons/Search.svelte';
   import {
+    ACTIVE_BOX,
     CLEARED_TOASTER,
     EDGES,
     ENTRIES,
@@ -95,14 +96,23 @@
     NODES,
     OPTIONS,
     OPTIONS_WITH_DISABLED,
+    PEER_A,
+    PEER_B,
     REGION_TOASTER,
+    ROUTE_SOURCE,
+    ROUTE_TARGET,
     SEGMENTS,
     SHELF_BOOK,
+    SINK,
     SLIDES,
     SOURCE,
     TABS,
     TABS_WITH_DISABLED,
+    TARGET,
+    TONE_NODES,
     TOASTS,
+    WIDE_SOURCE,
+    WIDE_STORE,
   } from './case-data';
   import type { ShelfBook } from './case-data';
 
@@ -225,6 +235,13 @@
     contextMenuAttached,
     diagramDefault,
     diagramBoxesOnly,
+    diagramTones,
+    diagramEdgePlain,
+    diagramEdgeBothHeads,
+    diagramEdgePath,
+    diagramEdgeLabelBacked,
+    diagramActive,
+    diagramScroll,
     dividerDefault,
     dividerStrong,
     dividerVertical,
@@ -774,6 +791,73 @@
     width={160}
     height={80}
     nodes={[SOURCE]}
+  />{/snippet}
+
+{#snippet diagramTones()}<Diagram
+    label="Box and group tones"
+    width={490}
+    height={130}
+    nodes={TONE_NODES}
+  />{/snippet}
+
+{#snippet diagramEdgePlain()}<Diagram
+    label="A plain edge"
+    width={360}
+    height={120}
+    nodes={[SOURCE, SINK]}
+    edges={[{ from: SOURCE, to: SINK, label: 'linked', heads: 'none' }]}
+  />{/snippet}
+
+{#snippet diagramEdgeBothHeads()}<Diagram
+    label="An edge with a head at both ends"
+    width={360}
+    height={120}
+    nodes={[PEER_A, PEER_B]}
+    edges={[{ from: PEER_A, to: PEER_B, label: 'syncs', heads: 'both' }]}
+  />{/snippet}
+
+{#snippet diagramEdgePath()}<Diagram
+    label="A routed edge with bends"
+    width={360}
+    height={220}
+    nodes={[ROUTE_SOURCE, ROUTE_TARGET]}
+    edges={[
+      {
+        from: ROUTE_SOURCE,
+        to: ROUTE_TARGET,
+        points: [
+          { x: 140, y: 44 },
+          { x: 180, y: 44 },
+          { x: 180, y: 164 },
+          { x: 220, y: 164 },
+        ],
+      },
+    ]}
+  />{/snippet}
+
+{#snippet diagramEdgeLabelBacked()}<Diagram
+    label="An edge label with a backing"
+    width={360}
+    height={120}
+    nodes={[SOURCE, TARGET]}
+    edges={[{ from: SOURCE, to: TARGET, label: 'over the line', labelBacked: true }]}
+  />{/snippet}
+
+{#snippet diagramActive()}<Diagram
+    label="An active box and edge"
+    width={360}
+    height={120}
+    nodes={[SOURCE, ACTIVE_BOX]}
+    edges={[{ from: SOURCE, to: ACTIVE_BOX, label: 'now', emphasis: 'active' }]}
+  />{/snippet}
+
+{#snippet diagramScroll()}<Diagram
+    label="A wide diagram"
+    scrollLabel="Wide diagram"
+    width={660}
+    height={120}
+    nodes={[WIDE_SOURCE, WIDE_STORE]}
+    edges={[{ from: WIDE_SOURCE, to: WIDE_STORE, label: 'wide diagram keeps its size' }]}
   />{/snippet}
 
 {#snippet dividerDefault()}<Divider />{/snippet}

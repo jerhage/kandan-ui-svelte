@@ -1,6 +1,12 @@
 import type { CarouselSlide } from '../components/carousel';
 import type { ComboboxOption } from '../components/combobox';
-import type { DiagramBox, DiagramEdge, DiagramGroup, DiagramNode } from '../components/diagram';
+import type {
+  DiagramBox,
+  DiagramEdge,
+  DiagramGroup,
+  DiagramNode,
+  DiagramTone,
+} from '../components/diagram';
 import type { FileItemData } from '../components/file-item';
 import type { HighlightSegment } from '../components/highlight';
 import type { KeyHint } from '../components/key-hints';
@@ -102,6 +108,67 @@ const EDGES: readonly DiagramEdge[] = [
   { from: STORE, to: VIEW },
 ];
 
+function toneNodes(): readonly DiagramNode[] {
+  const tones: readonly DiagramTone[] = ['success', 'warning', 'danger'];
+  return tones.flatMap((tone, index): readonly DiagramNode[] => {
+    const label = `${tone.slice(0, 1).toUpperCase()}${tone.slice(1)}`;
+    const left = 10 + index * 160;
+    return [
+      { kind: 'group', label, tone, x: left, y: 10, width: 140, height: 110 },
+      { kind: 'box', label, tone, x: left + 10, y: 50, width: 120, height: 48 },
+    ];
+  });
+}
+
+const TONE_NODES: readonly DiagramNode[] = toneNodes();
+
+const TARGET: DiagramBox = { kind: 'box', label: 'Target', x: 220, y: 40, width: 120, height: 48 };
+
+const SINK: DiagramBox = { kind: 'box', label: 'Sink', x: 220, y: 40, width: 120, height: 48 };
+
+const PEER_A: DiagramBox = { kind: 'box', label: 'Peer A', x: 20, y: 40, width: 120, height: 48 };
+
+const PEER_B: DiagramBox = { kind: 'box', label: 'Peer B', x: 220, y: 40, width: 120, height: 48 };
+
+const ACTIVE_BOX: DiagramBox = {
+  kind: 'box',
+  label: 'Active',
+  emphasis: 'active',
+  x: 220,
+  y: 40,
+  width: 120,
+  height: 48,
+};
+
+const ROUTE_SOURCE: DiagramBox = {
+  kind: 'box',
+  label: 'Source',
+  x: 20,
+  y: 20,
+  width: 120,
+  height: 48,
+};
+
+const ROUTE_TARGET: DiagramBox = {
+  kind: 'box',
+  label: 'Target',
+  x: 220,
+  y: 140,
+  width: 120,
+  height: 48,
+};
+
+const WIDE_SOURCE: DiagramBox = { ...SOURCE, tone: 'primary' };
+
+const WIDE_STORE: DiagramBox = {
+  kind: 'box',
+  label: 'Store',
+  x: 520,
+  y: 40,
+  width: 120,
+  height: 48,
+};
+
 const SLIDES: readonly CarouselSlide[] = [
   { key: 'one', beside: -1 },
   { key: 'two', beside: 0 },
@@ -157,6 +224,7 @@ const SEGMENTS: readonly HighlightSegment[] = [
 ];
 
 export {
+  ACTIVE_BOX,
   CLEARED_TOASTER,
   EDGES,
   ENTRIES,
@@ -167,13 +235,22 @@ export {
   NODES,
   OPTIONS,
   OPTIONS_WITH_DISABLED,
+  PEER_A,
+  PEER_B,
   REGION_TOASTER,
+  ROUTE_SOURCE,
+  ROUTE_TARGET,
   SEGMENTS,
   SHELF_BOOK,
+  SINK,
   SLIDES,
   SOURCE,
   TABS,
   TABS_WITH_DISABLED,
+  TARGET,
+  TONE_NODES,
   TOASTS,
+  WIDE_SOURCE,
+  WIDE_STORE,
 };
 export type { ShelfBook };
